@@ -1,7 +1,7 @@
 using System;
 namespace RFShell
 {
-    public class MenuSidebar
+    public class MenuSidebar 
     {
         public MenuSidebar()
         {
