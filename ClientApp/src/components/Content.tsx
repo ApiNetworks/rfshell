@@ -27,7 +27,7 @@ export class Content extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      items: createListItems(200),
+      items: createListItems(5),
       selection: new Selection({
         onSelectionChanged: this._onSelectionChanged
       }),
@@ -107,6 +107,7 @@ export class Content extends React.Component<any, any> {
       items,
       selection,
       selectionMode,
+      breadcrumbs,
       menuItems,
       farMenuItems
     } = this.state;
@@ -115,13 +116,10 @@ export class Content extends React.Component<any, any> {
       <div className="container">
         <Breadcrumb
           className="breadcrumbs"
-          items={this.state.breadcrumbs}
+          items={breadcrumbs}
           maxDisplayedItems={3}
         />
-        <CommandBar
-          items={this.state.menuItems}
-          farItems={this.state.farMenuItems}
-        />
+        <CommandBar items={menuItems} farItems={farMenuItems} />
         <div className="selection">
           <MarqueeSelection
             selection={selection}
@@ -149,9 +147,6 @@ export class Content extends React.Component<any, any> {
             </SelectionZone>
           </MarqueeSelection>
         </div>
-        <div>{JSON.stringify(this.state.menuItems)}</div>
-        <hr></hr>
-        <div>{JSON.stringify(this.state.breadcrumbs)}</div>
       </div>
     );
   }

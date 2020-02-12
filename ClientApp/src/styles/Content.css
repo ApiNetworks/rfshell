@@ -1,10 +1,10 @@
 .body .container {
-  padding: 1em;
+  padding: 0em;
 }
 
 .body .ms-Breadcrumb {
   margin-top: 0;
-  margin-bottom: 1em;
+  margin-bottom: 0em;
 }
 
 .body .selection {
@@ -18,5 +18,5 @@
 }
 
 .body .selection .selection-item .name {
-  margin-left: 1em;
+  margin-left: 0em;
 }

@@ -11,7 +11,6 @@ export class SidebarMenu extends React.Component<any, any> {
       collapsed: props.collapsed
     };
   }
-  static displayName = SidebarMenu.name;
 
   static defaultProps = {
     groups: [
@@ -94,7 +93,7 @@ export class SidebarMenu extends React.Component<any, any> {
 
   render() {
     return (
-      <div className="SidebarMenu">
+      <div>
         <Nav groups={this.state.sidebarmenu.groups} />
       </div>
     );

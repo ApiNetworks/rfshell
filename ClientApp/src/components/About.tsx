@@ -1,18 +1,7 @@
 import React from "react";
-import {
-  Stack,
-  IStackTokens,
-  Text,
-  Link,
-  FontWeights,
-  DefaultButton,
-  PrimaryButton,
-  ScrollablePane
-} from "office-ui-fabric-react";
+import { PrimaryButton } from "office-ui-fabric-react";
 
 export class About extends React.Component {
-  static displayName = About.name;
-
   render() {
     function _alertClicked(): void {
       alert("Clicked");

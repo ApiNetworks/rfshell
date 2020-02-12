@@ -1,22 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { Route } from "react-router";
 import { Layout } from "./components/Layout";
 import { Home } from "./components/Home";
 import { About } from "./components/About";
-import {
-  Stack,
-  IStackTokens,
-  Text,
-  Link,
-  FontWeights,
-  DefaultButton,
-  PrimaryButton,
-  ScrollablePane
-} from "office-ui-fabric-react";
 
-export default class App extends Component {
-  static displayName = App.name;
-
+export default class App extends React.Component {
   render() {
     return (
       <Layout>

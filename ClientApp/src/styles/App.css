@@ -3,7 +3,7 @@ Set the main wrapper component to
 take up the entire height of the page
  */
 .App {
-  min-height: 100vh; 
+  min-height: 100vh;
 }
 /*
 To use Flexbox we need to set the display
@@ -38,9 +38,10 @@ grow or shrink with the rest of the page.
 .body .sidebar {
   order: -1;
   max-width: 12em;
-  flex-grow: 0;    /* Defined the ability to groe */
-  flex-shrink: 0;  /* Defines the ability to shrink */
-  flex-basis: 12em;/* Default value of the element before distribuing the remaing space */
+  flex-grow: 0; /* Defined the ability to grow */
+  flex-shrink: 0; /* Defines the ability to shrink */
+  flex-basis: 12em; /* Default value of the element before distribuing the remaing space */
+  background-color: red;
 }
 /*
 Lastly we give some custom height to our 
