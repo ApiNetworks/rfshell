@@ -13,34 +13,53 @@ import { Content } from "./Content";
 import { SidebarMenu } from "./navigation/SidebarMenu";
 import { Footer } from "./layout/Footer";
 
-// Styles definition
-const stackHeaderStyles: IStackStyles = {
-  root: {
-    background: DefaultPalette.blueDark,
-    padding: 10
-  }
-};
 const stackStyles: IStackStyles = {
-  root: {
-    background: DefaultPalette.themeTertiary
-  }
-};
-const sidebarMenuStackItemStyles: IStackItemStyles = {
-  root: {
-    background: DefaultPalette.themePrimary,
-    color: DefaultPalette.white,
-    display: "flex",
-    justifyContent: "flex-start"
-  }
-};
-const contentStackItemStyles: IStackItemStyles = {
   root: {
     background: DefaultPalette.white
   }
 };
 
+const stackWrapperStyles: IStackStyles = {
+  root: {
+    background: DefaultPalette.white,
+    padding: 0
+  }
+};
+// Styles definition
+const stackHeaderStyles: IStackStyles = {
+  root: {
+    background: DefaultPalette.themePrimary,
+    padding: 0,
+    minHeight: "50px"
+  }
+};
+
+const stackFooterStyles: IStackStyles = {
+  root: {
+    background: DefaultPalette.themePrimary,
+    padding: 0,
+    minHeight: "25px"
+  }
+};
+
+const sidebarMenuStackItemStyles: IStackItemStyles = {
+  root: {
+    background: DefaultPalette.neutralLight,
+    color: DefaultPalette.white,
+    display: "flex",
+    justifyContent: "flex-start"
+  }
+};
+
+const contentStackItemStyles: IStackItemStyles = {
+  root: {
+    background: DefaultPalette.white,
+    minHeight: "calc(100vh - 81px)"
+  }
+};
 // Tokens definition
 const outerStackTokens: IStackTokens = { childrenGap: 0 };
+
 const innerStackTokens: IStackTokens = {
   childrenGap: 0,
   padding: 0
@@ -48,13 +67,9 @@ const innerStackTokens: IStackTokens = {
 
 export class Home extends React.Component {
   render() {
-    function _alertClicked(): void {
-      alert("Clicked");
-    }
-
     return (
       <Fabric>
-        <Stack tokens={outerStackTokens}>
+        <Stack styles={stackWrapperStyles} tokens={outerStackTokens}>
           <Stack styles={stackHeaderStyles} tokens={innerStackTokens}>
             <Header />
           </Stack>
@@ -64,17 +79,23 @@ export class Home extends React.Component {
             tokens={innerStackTokens}
             verticalAlign="start"
           >
-            <Stack.Item grow styles={sidebarMenuStackItemStyles}>
+            <Stack.Item
+              align="stretch"
+              grow={1}
+              styles={sidebarMenuStackItemStyles}
+            >
               <SidebarMenu />
             </Stack.Item>
-            <Stack.Item grow={8} styles={contentStackItemStyles}>
+            <Stack.Item
+              align="stretch"
+              grow={8}
+              styles={contentStackItemStyles}
+            >
               <Content />
             </Stack.Item>
           </Stack>
-          <Stack styles={stackHeaderStyles} tokens={innerStackTokens}>
-            <Stack.Item>
-              <Footer />
-            </Stack.Item>
+          <Stack styles={stackFooterStyles} tokens={innerStackTokens}>
+            <Footer />
           </Stack>
         </Stack>
       </Fabric>

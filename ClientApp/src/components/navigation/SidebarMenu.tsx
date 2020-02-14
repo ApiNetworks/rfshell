@@ -93,9 +93,10 @@ export class SidebarMenu extends React.Component<any, any> {
 
   render() {
     return (
-      <div>
-        <Nav groups={this.state.sidebarmenu.groups} />
-      </div>
+      <Nav
+        ariaLabel="Nav example similiar to one found in this demo page"
+        groups={this.state.sidebarmenu.groups}
+      />
     );
   }
 }

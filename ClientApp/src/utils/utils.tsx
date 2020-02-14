@@ -16,13 +16,14 @@ const LOCATIONS = ["Seattle", "New York", "Chicago", "Los Angeles", "Portland"];
  * @return {Any} Random element from the list.
  */
 
-export const randomFrom = list => list[Math.floor(Math.random() * list.length)];
+export const randomFrom = (list: string | any[]) =>
+  list[Math.floor(Math.random() * list.length)];
 /**
  * Returns a string of random lorem ipsum words of the size needed.
  * @param {Number} wordCount The lenght in words of the string.
  * @return {String} Random string of lorem ipsum words.
  */
-export const lorem = wordCount =>
+export const lorem = (wordCount: number) =>
   Array.apply(null, Array(wordCount))
     .map(item => randomFrom(LOREM_IPSUM_WORDS))
     .join(" ");
@@ -31,14 +32,14 @@ export const lorem = wordCount =>
  * @param {Any} x Any value.
  * @return {Any} returns the given value.
  */
-export const identity = x => x;
+export const identity = (x: any) => x;
 /**
  * Creates a valid selection item
  * @param {Number} count Number of items to return.
  * @param {Number} count Index to start the count. Defaults to 0.
  * @return {Array} List of valid selection items.
  */
-export const createListItems = (count, startIndex = 0) =>
+export const createListItems = (count: number, startIndex = 0) =>
   Array.apply(null, Array(count)).map((item, index) => {
     let size = 150 + Math.round(Math.random() * 100);
     return {
@@ -53,6 +54,11 @@ export const createListItems = (count, startIndex = 0) =>
       height: size
     };
   });
+
+function _randWord(array: string[]): string {
+  const index = Math.floor(Math.random() * array.length);
+  return array[index];
+}
 
 export const menuItems = [
   {
