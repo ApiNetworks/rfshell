@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getRTL } from "office-ui-fabric-react/lib/Utilities";
+import { getRTL, IRectangle } from "office-ui-fabric-react/lib/Utilities";
 import {
   FocusZone,
   FocusZoneDirection
@@ -116,11 +116,17 @@ const classNames: IListBasicExampleClassObject = mergeStyleSets({
   }
 });
 
+const ROWS_PER_PAGE = 3;
+const MAX_ROW_HEIGHT = 250;
+
 export class ListExample extends React.Component<
   IListBasicExampleProps,
   IListBasicExampleState
 > {
   private _originalItems: IExampleItem[];
+  private _columnCount: number = 0;
+  private _columnWidth: number = 0;
+  private _rowHeight: number = 0;
 
   constructor(props: IListBasicExampleProps) {
     super(props);
@@ -145,10 +151,35 @@ export class ListExample extends React.Component<
           label={"Filter by name" + resultCountText}
           onChange={this._onFilterChanged}
         />
-        <List items={items} onRenderCell={this._onRenderCell} />
+        <List
+          items={items}
+          getItemCountForPage={this._getItemCountForPage}
+          getPageHeight={this._getPageHeight}
+          renderedWindowsAhead={4}
+          onRenderCell={this._onRenderCell}
+        />
       </FocusZone>
     );
   }
+
+  private _getItemCountForPage = (
+    itemIndex: number | undefined,
+    surfaceRect: IRectangle | undefined
+  ): number => {
+    if (surfaceRect !== undefined && itemIndex === 0) {
+      this._columnCount = Math.ceil(surfaceRect.width / MAX_ROW_HEIGHT);
+      this._columnWidth = Math.floor(surfaceRect.width / this._columnCount);
+      this._rowHeight = this._columnWidth;
+    }
+    console.log(this._columnCount);
+    console.log(this._columnWidth);
+
+    return this._columnCount * ROWS_PER_PAGE;
+  };
+
+  private _getPageHeight = (): number => {
+    return this._rowHeight * ROWS_PER_PAGE;
+  };
 
   private _onFilterChanged = (_: any, text: string | undefined): void => {
     this.setState({
