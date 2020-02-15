@@ -12,6 +12,8 @@ import { Header } from "./layout/Header";
 import { Content } from "./Content";
 import { SidebarMenu } from "./navigation/SidebarMenu";
 import { Footer } from "./layout/Footer";
+import { CommandBar } from "office-ui-fabric-react";
+import { CommandBarApi } from "./navigation/CommandBarApi";
 
 const stackStyles: IStackStyles = {
   root: {
@@ -25,6 +27,7 @@ const stackWrapperStyles: IStackStyles = {
     padding: 0
   }
 };
+
 // Styles definition
 const stackHeaderStyles: IStackStyles = {
   root: {
@@ -57,6 +60,7 @@ const contentStackItemStyles: IStackItemStyles = {
     minHeight: "calc(100vh - 81px)"
   }
 };
+
 // Tokens definition
 const outerStackTokens: IStackTokens = { childrenGap: 0 };
 
@@ -65,13 +69,26 @@ const innerStackTokens: IStackTokens = {
   padding: 0
 };
 
-export class Home extends React.Component {
+export class Home extends React.Component<any, any> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      menuItems: [],
+      farMenuItems: []
+    };
+  }
+  componentDidMount() {}
+
   render() {
+    const { menuItems, farMenuItems } = this.state;
     return (
       <Fabric>
         <Stack styles={stackWrapperStyles} tokens={outerStackTokens}>
           <Stack styles={stackHeaderStyles} tokens={innerStackTokens}>
-            <Header />
+            <Header applicationName="Application" />
+          </Stack>
+          <Stack tokens={innerStackTokens}>
+            <CommandBarApi />
           </Stack>
           <Stack
             horizontal

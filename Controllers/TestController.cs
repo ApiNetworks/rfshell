@@ -24,24 +24,6 @@ namespace RFShell.Controllers
         }
 
         [HttpGet]
-        [Route("menu")]
-        public MenuItemCollection Get()
-        {
-            var rng = new Random();
-            MenuItemCollection collection = new MenuItemCollection();
-            collection.Key = "1";
-            collection.Name = "Sample Menu";
-            collection.AriaLabel = "Sample Menu";
-            collection.Items = Enumerable.Range(1, 5).Select(index => new MenuItem
-            {
-                Key = rng.Next().ToString(),
-                Name = $"Menu {rng.Next().ToString()}",
-            })
-            .ToArray();
-            return collection;
-        }
-
-        [HttpGet]
         [Route("breadcrumbs")]
         public BreadCrumbItem[] Get(string tr, string t)
         {

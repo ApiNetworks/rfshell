@@ -4,8 +4,6 @@ import {
   IBreadcrumbItem
 } from "office-ui-fabric-react/lib/Breadcrumb";
 import { CommandBar } from "office-ui-fabric-react/lib/CommandBar";
-import { IContextualMenuItem } from "office-ui-fabric-react/lib/ContextualMenu";
-import { MarqueeSelection } from "office-ui-fabric-react/lib/MarqueeSelection";
 import {
   Selection,
   SelectionMode,
@@ -13,14 +11,10 @@ import {
 } from "office-ui-fabric-react/lib/utilities/selection";
 import { Check } from "office-ui-fabric-react/lib/Check";
 
-import {
-  identity,
-  createListItems,
-  menuItems,
-  farMenuItems
-} from "../utils/utils";
+import { createListItems, menuItems, farMenuItems } from "../utils/utils";
 
-import { ListExample } from "./ListExample";
+import { ListAExample } from "./ListAExample";
+import { ListBExample } from "./ListBExample";
 
 export class Content extends React.Component<any, any> {
   constructor(props: any) {
@@ -49,7 +43,6 @@ export class Content extends React.Component<any, any> {
   static displayName = Content.name;
 
   componentDidMount() {
-    this._fetchMenu();
     this._fetchBreadcrumbs();
   }
 
@@ -61,28 +54,6 @@ export class Content extends React.Component<any, any> {
           this.setState({
             isLoaded: true,
             breadcrumbs: result
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        error => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      );
-  }
-
-  _fetchMenu() {
-    fetch("/test/menu")
-      .then(res => res.json())
-      .then(
-        result => {
-          this.setState({
-            isLoaded: true,
-            menuItems: result.items
           });
         },
         // Note: it's important to handle errors here
@@ -113,36 +84,10 @@ export class Content extends React.Component<any, any> {
 
     return (
       <div>
-        <CommandBar items={menuItems} farItems={farMenuItems} />
         <Breadcrumb items={breadcrumbs} maxDisplayedItems={3} />
 
-        <ListExample />
-
-        <MarqueeSelection
-          selection={selection}
-          isEnabled={selectionMode === SelectionMode.multiple}
-        >
-          <SelectionZone
-            selection={selection}
-            selectionMode={selectionMode}
-            onItemInvoked={item => alert(item)}
-          >
-            {items.map((item: any, index: any) => (
-              <div
-                key={index}
-                className="selection-item"
-                data-selection-index={index}
-              >
-                {selectionMode !== SelectionMode.none && (
-                  <span className="check" data-selection-toggle={true}>
-                    <Check checked={selection.isIndexSelected(index)} />
-                  </span>
-                )}
-                <span className="name">{item.name}</span>
-              </div>
-            ))}
-          </SelectionZone>
-        </MarqueeSelection>
+        <ListAExample />
+        <ListBExample />
       </div>
     );
   }

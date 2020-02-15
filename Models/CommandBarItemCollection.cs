@@ -3,15 +3,15 @@ using System.Collections.Generic;
 
 namespace RFShell
 {
-    public class MenuItemCollection
+    public class CommandBarItemCollection
     {
-        public MenuItemCollection()
+        public CommandBarItemCollection()
         {
-            this.Items = new MenuItem[] { };
+
         }
         public string Key { get; set; }
         public string Name { get; set; }
         public string AriaLabel { get; set; }
-        public MenuItem[] Items { get; set; }
+        public CommandBarItem[] Items { get; set; }
     }
 }

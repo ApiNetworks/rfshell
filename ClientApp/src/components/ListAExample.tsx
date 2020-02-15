@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Stack, IStackTokens } from "office-ui-fabric-react";
 import { getRTL, IRectangle } from "office-ui-fabric-react/lib/Utilities";
 import {
   FocusZone,
@@ -72,6 +73,20 @@ interface IListBasicExampleClassObject {
 const theme: ITheme = getTheme();
 const { palette, semanticColors, fonts } = theme;
 
+const listStackTokens: IStackTokens = {
+  childrenGap: 1,
+  padding: 10,
+  maxHeight: 500
+};
+
+const styles = mergeStyleSets({
+  container: {
+    overflow: "auto",
+    maxHeight: 500,
+    marginTop: 0
+  }
+});
+
 const classNames: IListBasicExampleClassObject = mergeStyleSets({
   itemCell: [
     getFocusStyle(theme, { inset: -1 }),
@@ -119,7 +134,7 @@ const classNames: IListBasicExampleClassObject = mergeStyleSets({
 const ROWS_PER_PAGE = 3;
 const MAX_ROW_HEIGHT = 250;
 
-export class ListExample extends React.Component<
+export class ListAExample extends React.Component<
   IListBasicExampleProps,
   IListBasicExampleState
 > {
@@ -151,13 +166,17 @@ export class ListExample extends React.Component<
           label={"Filter by name" + resultCountText}
           onChange={this._onFilterChanged}
         />
-        <List
-          items={items}
-          getItemCountForPage={this._getItemCountForPage}
-          getPageHeight={this._getPageHeight}
-          renderedWindowsAhead={4}
-          onRenderCell={this._onRenderCell}
-        />
+        <Stack className={styles.container} data-is-scrollable={true}>
+          <List
+            items={items}
+            getItemCountForPage={this._getItemCountForPage}
+            getPageHeight={this._getPageHeight}
+            renderedWindowsBehind={5}
+            renderedWindowsAhead={10}
+            onRenderCell={this._onRenderCell}
+            data-is-scrollable={true}
+          />
+        </Stack>
       </FocusZone>
     );
   }
@@ -173,7 +192,7 @@ export class ListExample extends React.Component<
     }
     console.log(this._columnCount);
     console.log(this._columnWidth);
-
+    console.log(this._rowHeight);
     return this._columnCount * ROWS_PER_PAGE;
   };
 
