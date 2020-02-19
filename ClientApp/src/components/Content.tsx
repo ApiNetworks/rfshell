@@ -16,6 +16,8 @@ import { createListItems, menuItems, farMenuItems } from "../utils/utils";
 import { ListAExample } from "./ListAExample";
 import { ListBExample } from "./ListBExample";
 
+const apiRoute = "/api/v1/breadcrumbsapi";
+
 export class Content extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -47,7 +49,7 @@ export class Content extends React.Component<any, any> {
   }
 
   _fetchBreadcrumbs() {
-    fetch("/test/breadcrumbs")
+    fetch(apiRoute)
       .then(res => res.json())
       .then(
         result => {

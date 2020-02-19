@@ -8,7 +8,7 @@ import {
 } from "office-ui-fabric-react";
 
 // calls api controller using route
-const apiRoute = "/api/v1/commandbar";
+const apiRoute = "/api/v1/commandbarapi";
 
 // state must conform to the interface
 export interface ICommandBarApi extends ICommandBarProps {
@@ -29,11 +29,14 @@ export class CommandBarApi extends React.Component<any, ICommandBarApi> {
 
   commandBarStyles: ICommandBarStyles = {
     root: {
-      background: DefaultPalette.neutralLight
+      background: DefaultPalette.neutralLight,
+      padding: 0
     },
     primarySet: {
-      background: DefaultPalette.neutralLight,
-      backgroundColor: DefaultPalette.neutralLight
+      background: DefaultPalette.neutralLight
+    },
+    secondarySet: {
+      background: DefaultPalette.neutralLight
     }
   };
 

@@ -81,13 +81,14 @@ export class Home extends React.Component<any, any> {
 
   render() {
     const { menuItems, farMenuItems } = this.state;
+    const divStyle = {
+      color: "red"
+    };
     return (
       <Fabric>
         <Stack styles={stackWrapperStyles} tokens={outerStackTokens}>
           <Stack styles={stackHeaderStyles} tokens={innerStackTokens}>
             <Header applicationName="Application" />
-          </Stack>
-          <Stack tokens={innerStackTokens}>
             <CommandBarApi />
           </Stack>
           <Stack

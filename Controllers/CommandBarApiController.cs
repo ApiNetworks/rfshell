@@ -9,11 +9,11 @@ namespace RFShell.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class CommandBarController : ControllerBase
+    public class CommandBarApiController : ControllerBase
     {
-        private readonly ILogger<CommandBarController> _logger;
+        private readonly ILogger<CommandBarApiController> _logger;
 
-        public CommandBarController(ILogger<CommandBarController> logger)
+        public CommandBarApiController(ILogger<CommandBarApiController> logger)
         {
             _logger = logger;
         }

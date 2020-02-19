@@ -1,5 +1,13 @@
 import React from "react";
-import { Nav, INavLinkGroup, INavProps } from "office-ui-fabric-react/lib/Nav";
+import {
+  Nav,
+  INavLinkGroup,
+  INavProps,
+  INavLink
+} from "office-ui-fabric-react/lib/Nav";
+
+// calls api controller using route
+const apiRoute = "/api/v1/sidebarapi";
 
 export class SidebarMenu extends React.Component<any, any> {
   constructor(props: any) {
@@ -70,7 +78,7 @@ export class SidebarMenu extends React.Component<any, any> {
     this._fetchSidebarMenu();
   }
   _fetchSidebarMenu() {
-    fetch("/test/sidebarmenu")
+    fetch(apiRoute)
       .then(res => res.json())
       .then(
         result => {
@@ -91,11 +99,26 @@ export class SidebarMenu extends React.Component<any, any> {
       );
   }
 
+  _onLinkClick(
+    ev: React.MouseEvent<HTMLElement> | undefined,
+    item?: INavLink | undefined
+  ) {
+    if (ev !== undefined) alert(ev.target);
+    return false;
+  }
+
   render() {
     return (
       <Nav
         ariaLabel="Nav example similiar to one found in this demo page"
         groups={this.state.sidebarmenu.groups}
+        styles={{
+          root: {
+            width: 300,
+            overflowY: "auto"
+          }
+        }}
+        onLinkClick={this._onLinkClick}
       />
     );
   }
