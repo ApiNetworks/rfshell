@@ -21,59 +21,55 @@ namespace RFShell.Controllers
         [HttpGet]
         public SidebarLinkItemCollection Get()
         {
-            SidebarLinkItemCollection sidebar = new SidebarLinkItemCollection()
+            return new SidebarLinkItemCollection()
             {
-                Groups = new SidebarLinkItem[] {
-                    new SidebarLinkItem() {
-                        Links = new SidebarLinkItem[] {
-                            new SidebarLinkItem(){
-                                Name="Link A",
-                                Url = "http://www.cnn.com",
-                                IconProps = new IconProp().RandomIcon()
-                            },
-                            new SidebarLinkItem(){
-                                Name="Link B",
-                                Url = "http://www.cnn.com",
-                                IconProps = new IconProp().RandomIcon()
-                            },
-                            new SidebarLinkItem(){
-                                Name="Link C",
-                                Url = "http://www.cnn.com",
-                                IconProps = new IconProp().RandomIcon(),
-                                Links = new SidebarLinkItem[]{
-                                    new SidebarLinkItem(){
-                                        Name="Link C.1",
-                                        Url = "http://www.cnn.com",
-                                        IconProps = new IconProp().RandomIcon()
-                                    },
-                                     new SidebarLinkItem(){
-                                        Name="Link C.2",
-                                        Url = "http://www.cnn.com",
-                                        IconProps = new IconProp().RandomIcon()
-                                    },
-                                }
-                            },
-                            new SidebarLinkItem(){
-                                Name="Link D",
-                                Url = "http://www.cnn.com",
-                                IconProps = new IconProp().RandomIcon()
-                            },
-                            new SidebarLinkItem(){
-                                Name="Link E",
-                                Url = "http://www.cnn.com",
-                                IconProps = new IconProp().RandomIcon()
-                            },
-                            new SidebarLinkItem(){
-                                Name="Link F",
-                                Url = "http://www.cnn.com",
-                                IconProps = new IconProp().RandomIcon()
-                            },
-                        }
-                    }
-                }
+                Groups = GetRandomLinkItems()
             };
+        }
 
-            return sidebar;
+        public SidebarLinkItem[] GetRandomLinkItems()
+        {
+            var rnd = new Random();
+            return Enumerable.Range(5, rnd.Next(6, 10)).Select(index => GetRandomLinkItem()).ToArray();
+        }
+
+        public SidebarLinkItem GetRandomLinkItem()
+        {
+            return new SidebarLinkItem()
+            {
+                Name = GetRandomLinkName(),
+                Url = GetRandomLinkUrl(),
+                IconProps = new IconProp().RandomIcon(),
+                Links = GetRandomSubLinkItems()
+            };
+        }
+
+        public SidebarLinkItem[] GetRandomSubLinkItems()
+        {
+            var rnd = new Random();
+            return Enumerable.Range(5, rnd.Next(6, 10)).Select(index => GetRandomSubLinkItem()).ToArray();
+        }
+
+        public SidebarLinkItem GetRandomSubLinkItem()
+        {
+            return new SidebarLinkItem()
+            {
+                Name = GetRandomLinkName(),
+                Url = GetRandomLinkUrl(),
+                IconProps = new IconProp().RandomIcon(),
+            };
+        }
+
+        public string GetRandomLinkName()
+        {
+            var rnd = new Random();
+            return $"Link {rnd.Next(1000, 9999)}";
+        }
+
+        public string GetRandomLinkUrl()
+        {
+            var rnd = new Random();
+            return $"_target{rnd.Next(1000, 9999)}";
         }
     }
 }

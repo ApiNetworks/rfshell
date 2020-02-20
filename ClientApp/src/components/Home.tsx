@@ -10,7 +10,7 @@ import { DefaultPalette } from "office-ui-fabric-react/lib/Styling";
 import { Fabric } from "office-ui-fabric-react/lib/Fabric";
 import { Header } from "./layout/Header";
 import { Content } from "./Content";
-import { SidebarMenu } from "./navigation/SidebarMenu";
+import { SidebarApi } from "./navigation/SidebarApi";
 import { Footer } from "./layout/Footer";
 import { CommandBar } from "office-ui-fabric-react";
 import { CommandBarApi } from "./navigation/CommandBarApi";
@@ -32,8 +32,7 @@ const stackWrapperStyles: IStackStyles = {
 const stackHeaderStyles: IStackStyles = {
   root: {
     background: DefaultPalette.themePrimary,
-    padding: 0,
-    minHeight: "50px"
+    padding: 0
   }
 };
 
@@ -88,7 +87,7 @@ export class Home extends React.Component<any, any> {
       <Fabric>
         <Stack styles={stackWrapperStyles} tokens={outerStackTokens}>
           <Stack styles={stackHeaderStyles} tokens={innerStackTokens}>
-            <Header applicationName="Application" />
+            <Header applicationName="Application Manager" />
             <CommandBarApi />
           </Stack>
           <Stack
@@ -102,7 +101,7 @@ export class Home extends React.Component<any, any> {
               grow={1}
               styles={sidebarMenuStackItemStyles}
             >
-              <SidebarMenu />
+              <SidebarApi />
             </Stack.Item>
             <Stack.Item
               align="stretch"

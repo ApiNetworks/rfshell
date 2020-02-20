@@ -3,13 +3,23 @@ import {
   Nav,
   INavLinkGroup,
   INavProps,
-  INavLink
+  INavLink,
+  INavStyleProps,
+  INavStyles
 } from "office-ui-fabric-react/lib/Nav";
+import { FontSizes } from "office-ui-fabric-react";
 
 // calls api controller using route
 const apiRoute = "/api/v1/sidebarapi";
 
-export class SidebarMenu extends React.Component<any, any> {
+const navStyles = {
+  linkText: {
+    fontSize: 20,
+    paddingLeft: 25
+  }
+};
+
+export class SidebarApi extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -19,60 +29,6 @@ export class SidebarMenu extends React.Component<any, any> {
       collapsed: props.collapsed
     };
   }
-
-  static defaultProps = {
-    groups: [
-      {
-        links: [
-          {
-            name: "Home",
-            url: "http://example.com",
-            links: [
-              {
-                name: "Activity",
-                url: "http://msn.com"
-              },
-              {
-                name: "News",
-                url: "http://msn.com"
-              }
-            ],
-            isExpanded: true
-          },
-          {
-            name: "Documents",
-            url: "http://example.com",
-            isExpanded: true
-          },
-          {
-            name: "Pages",
-            url: "http://msn.com"
-          },
-          {
-            name: "Notebook",
-            url: "http://msn.com"
-          },
-          {
-            name: "Long Name Test for elipsis. Longer than 12em!",
-            url: "http://example.com"
-          },
-          {
-            name: "Edit Link",
-            url: "http://example.com",
-            iconClassName: "ms-Icon--Edit"
-          },
-          {
-            name: "Edit",
-            url: "#",
-            icon: "Edit",
-            onClick: () => {}
-          }
-        ]
-      }
-    ],
-    expanded: "expanded",
-    collapsed: "collapsed"
-  };
 
   componentDidMount() {
     this._fetchSidebarMenu();
@@ -114,8 +70,16 @@ export class SidebarMenu extends React.Component<any, any> {
         groups={this.state.sidebarmenu.groups}
         styles={{
           root: {
-            width: 300,
-            overflowY: "auto"
+            minWidth: 200,
+            paddingLeft: 5
+          },
+          link: {
+            paddingLeft: 20,
+            paddingTop: 0,
+            paddingBottom: 5
+          },
+          linkText: {
+            fontSize: 14
           }
         }}
         onLinkClick={this._onLinkClick}

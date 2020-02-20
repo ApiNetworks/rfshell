@@ -5,7 +5,7 @@ namespace RFShell
     {
         public SidebarLinkItem()
         {
-            Links = new SidebarLinkItem[] { };
+
         }
         public string Name { get; set; }
         public string Url { get; set; }
