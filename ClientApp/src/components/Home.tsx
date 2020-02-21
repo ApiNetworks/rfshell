@@ -6,13 +6,24 @@ import {
   IStackItemStyles,
   IStackProps
 } from "office-ui-fabric-react/lib/Stack";
-import { DefaultPalette } from "office-ui-fabric-react/lib/Styling";
+import {
+  DefaultPalette,
+  mergeStyles
+} from "office-ui-fabric-react/lib/Styling";
 import { Fabric } from "office-ui-fabric-react/lib/Fabric";
 import { Header } from "./layout/Header";
 import { Content } from "./Content";
 import { SidebarApi } from "./navigation/SidebarApi";
 import { Footer } from "./layout/Footer";
-import { CommandBar } from "office-ui-fabric-react";
+import {
+  CommandBar,
+  FontIcon,
+  Button,
+  IconButton,
+  IIconProps,
+  CommandBarButton,
+  Separator
+} from "office-ui-fabric-react";
 import { CommandBarApi } from "./navigation/CommandBarApi";
 
 const stackStyles: IStackStyles = {
@@ -32,6 +43,12 @@ const stackWrapperStyles: IStackStyles = {
 const stackHeaderStyles: IStackStyles = {
   root: {
     background: DefaultPalette.themePrimary,
+    padding: 0
+  }
+};
+
+const stackCommandBarStyles: IStackStyles = {
+  root: {
     padding: 0
   }
 };
@@ -68,6 +85,20 @@ const innerStackTokens: IStackTokens = {
   padding: 0
 };
 
+const iconClass = mergeStyles({
+  fontSize: 20,
+  height: 20,
+  width: 20,
+  paddingLeft: 10,
+  paddingRight: 20,
+  cursor: "pointer"
+});
+
+const sidebarToggleProps: IIconProps = {
+  iconName: "GlobalNavButton",
+  styles: { root: { padding: 10 } }
+};
+
 export class Home extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -88,6 +119,19 @@ export class Home extends React.Component<any, any> {
         <Stack styles={stackWrapperStyles} tokens={outerStackTokens}>
           <Stack styles={stackHeaderStyles} tokens={innerStackTokens}>
             <Header applicationName="Application Manager" />
+          </Stack>
+          <Stack
+            horizontal
+            verticalAlign="center"
+            styles={stackCommandBarStyles}
+            tokens={innerStackTokens}
+          >
+            <CommandBarButton
+              iconProps={sidebarToggleProps}
+              title="Toggle sidebar menu on/off"
+              ariaLabel="Toggle sidebar menu on/off"
+            />
+            <Separator vertical />
             <CommandBarApi />
           </Stack>
           <Stack

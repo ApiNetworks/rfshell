@@ -4,7 +4,9 @@ import {
   CommandBar,
   ICommandBarStyles,
   DefaultPalette,
-  ICommandBarProps
+  ICommandBarProps,
+  FontIcon,
+  mergeStyles
 } from "office-ui-fabric-react";
 
 // calls api controller using route

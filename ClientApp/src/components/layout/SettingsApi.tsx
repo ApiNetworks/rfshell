@@ -1,54 +1,68 @@
 import * as React from "react";
-import { Panel, PanelType } from "office-ui-fabric-react/lib/Panel";
+import { Panel } from "office-ui-fabric-react/lib/Panel";
 import { useConstCallback } from "@uifabric/react-hooks";
-import { mergeStyles, FontIcon } from "office-ui-fabric-react";
+import {
+  IconButton,
+  IButtonStyles,
+  DefaultPalette
+} from "office-ui-fabric-react";
 
 export const SettingsApi: React.FunctionComponent = () => {
   const [isOpen, setIsOpen] = React.useState(false);
-
   const openPanel = useConstCallback(() => setIsOpen(true));
   const dismissPanel = useConstCallback(() => setIsOpen(false));
-  const iconClass = mergeStyles({
-    fontSize: 20,
-    height: 20,
-    width: 20,
-    paddingRight: 20,
-    cursor: "pointer",
-    color: "#fff"
-  });
+  const btnSettingsStyle: IButtonStyles = {
+    root: {
+      color: "#fff",
+      backgroundColor: DefaultPalette.themePrimary
+    },
+    rootHovered: {
+      color: "#fff",
+      backgroundColor: DefaultPalette.themeSecondary
+    }
+  };
+
   return (
-    <div>
-      <FontIcon
-        iconName="ContentSettings"
-        className={iconClass}
+    <span>
+      <IconButton
+        styles={btnSettingsStyle}
+        iconProps={{ iconName: "Message" }}
+        title="Toggle right panel on/off"
         onClick={openPanel}
       />
-      <FontIcon
-        iconName="AlertSettings"
-        className={iconClass}
+      <IconButton
+        styles={btnSettingsStyle}
+        iconProps={{ iconName: "AlertSettings" }}
+        title="Toggle right panel on/off"
         onClick={openPanel}
       />
-      <FontIcon
-        iconName="PlayerSettings"
-        className={iconClass}
+      <IconButton
+        styles={btnSettingsStyle}
+        iconProps={{ iconName: "PlayerSettings" }}
+        title="Toggle right panel on/off"
         onClick={openPanel}
       />
-      <FontIcon
-        iconName="DataManagementSettings"
-        className={iconClass}
+      <IconButton
+        styles={btnSettingsStyle}
+        iconProps={{ iconName: "DataManagementSettings" }}
+        title="Toggle right panel on/off"
         onClick={openPanel}
       />
-      <FontIcon iconName="Settings" className={iconClass} onClick={openPanel} />
+      <IconButton
+        styles={btnSettingsStyle}
+        iconProps={{ iconName: "settings" }}
+        title="Toggle right panel on/off"
+        onClick={openPanel}
+      />
       <Panel
         headerText="Custom Settings"
         isOpen={isOpen}
         onDismiss={dismissPanel}
         isBlocking={true}
-        // You MUST provide this prop! Otherwise screen readers will just say "button" with no label.
-        closeButtonAriaLabel="Close"
+        closeButtonAriaLabel="Close" // You MUST provide this prop! Otherwise screen readers will just say "button" with no label.
       >
-        <p></p>
-      </Panel>
-    </div>
+        <p>Settings go here...</p>
+      </Panel>{" "}
+    </span>
   );
 };

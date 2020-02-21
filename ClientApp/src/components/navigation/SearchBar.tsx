@@ -2,12 +2,18 @@ import React from "react";
 import { SearchBox } from "office-ui-fabric-react/lib/SearchBox";
 import { DefaultPalette } from "office-ui-fabric-react";
 
-export class NavigationBar extends React.Component {
+export class SearchBar extends React.Component {
   render() {
     return (
       <SearchBox
         labelText="Search"
-        styles={{ root: { backgroundColor: DefaultPalette.themeLight } }}
+        styles={{
+          root: {
+            backgroundColor: DefaultPalette.themeLight,
+            maxWidth: 500,
+            borderWidth: 0
+          }
+        }}
         onChange={newValue =>
           console.log("SearchBox onChange fired: " + newValue)
         }

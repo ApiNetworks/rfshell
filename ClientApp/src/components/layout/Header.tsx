@@ -1,5 +1,5 @@
 import React from "react";
-import { NavigationBar } from "../navigation/NavigationBar";
+import { SearchBar } from "../navigation/SearchBar";
 import { Label } from "office-ui-fabric-react/lib/Label";
 import { Stack, IStackStyles, FontSizes } from "office-ui-fabric-react";
 import { PanelApi } from "./PanelApi";
@@ -13,11 +13,16 @@ const stackLogoStyles: IStackStyles = {
   }
 };
 
-const stackSearchStyles: IStackStyles = {
+const searchStackStyles: IStackStyles = {
   root: {
-    verticalAlign: "center",
     alignContent: "stretch",
     padding: 0,
+    paddingRight: 20
+  }
+};
+const settingsStackStyles: IStackStyles = {
+  root: {
+    alignContent: "flex-end",
     paddingRight: 20
   }
 };
@@ -44,17 +49,18 @@ export class Header extends React.Component<IHeaderProps, any> {
               root: {
                 color: "#fff",
                 fontSize: FontSizes.large,
-                paddingTop: 12
+                paddingTop: 12,
+                paddingLeft: 20
               }
             }}
           >
             {this.state.applicationName}
           </Label>
         </Stack.Item>
-        <Stack.Item styles={stackSearchStyles} grow={2}>
-          <NavigationBar />
+        <Stack.Item styles={searchStackStyles} grow={5}>
+          <SearchBar />
         </Stack.Item>
-        <Stack.Item styles={stackSearchStyles} grow={1} verticalFill={true}>
+        <Stack.Item styles={settingsStackStyles}>
           <SettingsApi />
         </Stack.Item>
       </Stack>
