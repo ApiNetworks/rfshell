@@ -190,9 +190,9 @@ export class ListAExample extends React.Component<
       this._columnWidth = Math.floor(surfaceRect.width / this._columnCount);
       this._rowHeight = this._columnWidth;
     }
-    console.log(this._columnCount);
-    console.log(this._columnWidth);
-    console.log(this._rowHeight);
+    //console.log(this._columnCount);
+    //console.log(this._columnWidth);
+    //console.log(this._rowHeight);
     return this._columnCount * ROWS_PER_PAGE;
   };
 

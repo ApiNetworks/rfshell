@@ -19,45 +19,67 @@ namespace RFShell.Controllers
         }
 
         [HttpGet]
-        public SidebarLinkItemCollection Get()
+        public SidebarRoot Get()
         {
-            return new SidebarLinkItemCollection()
+            return new SidebarRoot()
             {
-                Groups = GetRandomLinkItems()
+                Groups = GetSidebarLinksCollection(),
             };
         }
 
-        public SidebarLinkItem[] GetRandomLinkItems()
+        public SidebarGroup[] GetSidebarLinksCollection()
         {
-            var rnd = new Random();
-            return Enumerable.Range(5, rnd.Next(6, 10)).Select(index => GetRandomLinkItem()).ToArray();
+            return new SidebarGroup[] { GetRandomGroup() };
         }
 
-        public SidebarLinkItem GetRandomLinkItem()
+        private SidebarGroup GetRandomGroup()
         {
-            return new SidebarLinkItem()
+            return new SidebarGroup()
             {
+                Links = GetRandomLinks()
+            };
+        }
+
+        public SidebarLink[] GetRandomLinks()
+        {
+            return new SidebarLink[] {
+                GetRandomChevronLink(),
+                GetRandomTopLink(),
+                GetRandomTopLink(),
+                GetRandomChevronLink(),
+                GetRandomChevronLink()
+                };
+        }
+
+        public SidebarLink GetRandomTopLink()
+        {
+            var rnd = new Random();
+            return new SidebarLink()
+            {
+                Key = rnd.Next(1, 999999999).ToString(),
                 Name = GetRandomLinkName(),
                 Url = GetRandomLinkUrl(),
                 IconProps = new IconProp().RandomIcon(),
-                Links = GetRandomSubLinkItems()
             };
         }
 
-        public SidebarLinkItem[] GetRandomSubLinkItems()
+        public SidebarLink GetRandomChevronLink()
         {
             var rnd = new Random();
-            return Enumerable.Range(5, rnd.Next(6, 10)).Select(index => GetRandomSubLinkItem()).ToArray();
-        }
-
-        public SidebarLinkItem GetRandomSubLinkItem()
-        {
-            return new SidebarLinkItem()
+            return new SidebarLink()
             {
+                Key = rnd.Next(1, 999999999).ToString(),
                 Name = GetRandomLinkName(),
                 Url = GetRandomLinkUrl(),
-                IconProps = new IconProp().RandomIcon(),
+                Links = GetRandomTopLinks(),
+                IsExpanded = false
             };
+        }
+
+        public SidebarLink[] GetRandomTopLinks()
+        {
+            var rnd = new Random();
+            return Enumerable.Range(5, rnd.Next(6, 10)).Select(index => GetRandomTopLink()).ToArray();
         }
 
         public string GetRandomLinkName()
@@ -69,7 +91,7 @@ namespace RFShell.Controllers
         public string GetRandomLinkUrl()
         {
             var rnd = new Random();
-            return $"_target{rnd.Next(1000, 9999)}";
+            return ""; //$"_target{rnd.Next(1000, 9999)}";
         }
     }
 }

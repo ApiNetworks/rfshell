@@ -89,7 +89,7 @@ export class Content extends React.Component<any, any> {
         <Breadcrumb items={breadcrumbs} maxDisplayedItems={3} />
 
         <ListAExample />
-        <ListBExample />
+        {/* <ListBExample /> */}
       </div>
     );
   }

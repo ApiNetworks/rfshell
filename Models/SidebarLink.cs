@@ -1,17 +1,18 @@
 using System;
 namespace RFShell
 {
-    public class SidebarLinkItem
+    public class SidebarLink
     {
-        public SidebarLinkItem()
+        public SidebarLink()
         {
-
+            IsExpanded = false;
         }
+        public string Key { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
-        public bool isExpanded { get; set; }
+        public bool IsExpanded { get; set; }
         public IconProp IconProps { get; set; }
         public string IconClassName { get; set; }
-        public SidebarLinkItem[] Links { get; set; }
+        public SidebarLink[] Links { get; set; }
     }
 }

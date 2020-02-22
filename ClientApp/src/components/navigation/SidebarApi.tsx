@@ -14,8 +14,8 @@ const apiRoute = "/api/v1/sidebarapi";
 
 const navStyles = {
   linkText: {
-    fontSize: 20,
-    paddingLeft: 25
+    //fontSize: 20
+    //paddingLeft: 25
   }
 };
 
@@ -33,9 +33,16 @@ export class SidebarApi extends React.Component<any, any> {
   componentDidMount() {
     this._fetchSidebarMenu();
   }
+
+  _mapSidebar() {}
+
   _fetchSidebarMenu() {
     fetch(apiRoute)
       .then(res => res.json())
+      // .then(res => {
+      //   console.log(res);
+      //   return res;
+      // })
       .then(
         result => {
           this.setState({
@@ -66,17 +73,11 @@ export class SidebarApi extends React.Component<any, any> {
   render() {
     return (
       <Nav
-        ariaLabel="Nav example similiar to one found in this demo page"
         groups={this.state.sidebarmenu.groups}
         styles={{
           root: {
             minWidth: 200,
             paddingLeft: 5
-          },
-          link: {
-            paddingLeft: 20,
-            paddingTop: 0,
-            paddingBottom: 5
           },
           linkText: {
             fontSize: 14

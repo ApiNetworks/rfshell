@@ -32,11 +32,10 @@ const stackStyles: IStackStyles = {
   }
 };
 
-const stackRootStyles: IStackStyles = {
+const stackWrapperStyles: IStackStyles = {
   root: {
     background: DefaultPalette.white,
-    padding: 0,
-    height: "100vh"
+    padding: 0
   }
 };
 
@@ -114,48 +113,49 @@ export class Home extends React.Component<any, any> {
     };
     return (
       <Fabric>
-        <Stack styles={stackRootStyles}>
-          <Stack.Item styles={stackHeaderStyles}>
+        <Stack styles={stackWrapperStyles} tokens={outerStackTokens}>
+          <Stack styles={stackHeaderStyles} tokens={innerStackTokens}>
             <Header applicationName="Application Manager" />
-          </Stack.Item>
-          <Stack.Item>
-            <Stack horizontal>
-              <CommandBarButton
-                iconProps={sidebarToggleProps}
-                title="Toggle sidebar menu on/off"
-                ariaLabel="Toggle sidebar menu on/off"
-                onClick={this._toggleCommandBar}
-              />
-              <Separator vertical />
-              <CommandBarApi />
-            </Stack>
-          </Stack.Item>
-          <Stack.Item grow={2}>
-            <Stack
-              horizontal
-              styles={stackStyles}
-              tokens={innerStackTokens}
-              verticalAlign="start"
+          </Stack>
+          <Stack
+            horizontal
+            verticalAlign="center"
+            styles={stackCommandBarStyles}
+            tokens={innerStackTokens}
+          >
+            <CommandBarButton
+              iconProps={sidebarToggleProps}
+              title="Toggle sidebar menu on/off"
+              ariaLabel="Toggle sidebar menu on/off"
+              onClick={this._toggleCommandBar}
+            />
+            <Separator vertical />
+            <CommandBarApi />
+          </Stack>
+          <Stack
+            horizontal
+            styles={stackStyles}
+            tokens={innerStackTokens}
+            verticalAlign="start"
+          >
+            <Stack.Item
+              align="stretch"
+              grow={1}
+              styles={sidebarMenuStackItemStyles}
             >
-              <Stack.Item
-                align="stretch"
-                grow={1}
-                styles={sidebarMenuStackItemStyles}
-              >
-                <SidebarApi />
-              </Stack.Item>
-              <Stack.Item
-                align="stretch"
-                grow={8}
-                styles={contentStackItemStyles}
-              >
-                <Content />
-              </Stack.Item>
-            </Stack>
-          </Stack.Item>
-          <Stack.Item styles={stackFooterStyles}>
+              <SidebarApi />
+            </Stack.Item>
+            <Stack.Item
+              align="stretch"
+              grow={8}
+              styles={contentStackItemStyles}
+            >
+              <Content />
+            </Stack.Item>
+          </Stack>
+          <Stack styles={stackFooterStyles} tokens={innerStackTokens}>
             <Footer />
-          </Stack.Item>
+          </Stack>
         </Stack>
       </Fabric>
     );
