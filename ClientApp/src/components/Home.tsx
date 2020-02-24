@@ -22,7 +22,8 @@ import {
   IconButton,
   IIconProps,
   CommandBarButton,
-  Separator
+  Separator,
+  Panel
 } from "office-ui-fabric-react";
 import { CommandBarApi } from "./navigation/CommandBarApi";
 
@@ -94,17 +95,27 @@ const sidebarToggleProps: IIconProps = {
 export class Home extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
+    this._toggleSidebarApiStack = this._toggleSidebarApiStack.bind(this);
+    this._toggleSidebarSettings = this._toggleSidebarSettings.bind(this);
     this.state = {
       menuItems: [],
-      farMenuItems: []
+      farMenuItems: [],
+      showSidebarApiStack: true,
+      showSidebarSettings: false
     };
   }
   componentDidMount() {}
 
-  _toggleCommandBar() {
-    alert("Clicked");
-    sidebarMenuStackItemStyles: {
-    }
+  _toggleSidebarApiStack() {
+    this.setState({
+      showSidebarApiStack: !this.state.showSidebarApiStack
+    });
+  }
+
+  _toggleSidebarSettings() {
+    this.setState({
+      showSidebarSettings: !this.state.showSidebarSettings
+    });
   }
 
   render() {
@@ -124,7 +135,7 @@ export class Home extends React.Component<any, any> {
                 iconProps={sidebarToggleProps}
                 title="Toggle sidebar menu on/off"
                 ariaLabel="Toggle sidebar menu on/off"
-                onClick={this._toggleCommandBar}
+                onClick={this._toggleSidebarApiStack}
               />
               <Separator vertical />
               <CommandBarApi />
@@ -137,13 +148,16 @@ export class Home extends React.Component<any, any> {
               tokens={innerStackTokens}
               verticalAlign="start"
             >
-              <Stack.Item
-                align="stretch"
-                grow={1}
-                styles={sidebarMenuStackItemStyles}
-              >
-                <SidebarApi />
-              </Stack.Item>
+              {this.state.showSidebarApiStack && (
+                <Stack.Item
+                  align="stretch"
+                  grow={1}
+                  styles={sidebarMenuStackItemStyles}
+                >
+                  <SidebarApi />
+                </Stack.Item>
+              )}
+
               <Stack.Item
                 align="stretch"
                 grow={8}
@@ -151,6 +165,16 @@ export class Home extends React.Component<any, any> {
               >
                 <Content />
               </Stack.Item>
+
+              {this.state.showSidebarSettings && (
+                <Stack.Item
+                  align="stretch"
+                  grow={1}
+                  styles={sidebarMenuStackItemStyles}
+                >
+                  <SidebarApi />
+                </Stack.Item>
+              )}
             </Stack>
           </Stack.Item>
           <Stack.Item styles={stackFooterStyles}>
