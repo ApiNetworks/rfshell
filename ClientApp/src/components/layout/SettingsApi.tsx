@@ -6,6 +6,10 @@ import {
   IButtonStyles,
   DefaultPalette
 } from "office-ui-fabric-react";
+import { connect } from "react-redux";
+import { actions } from "../../actions";
+import { Dispatch, bindActionCreators } from "redux";
+import { IStore } from "../../store";
 
 export const SettingsApi: React.FunctionComponent = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -66,3 +70,25 @@ export const SettingsApi: React.FunctionComponent = () => {
     </span>
   );
 };
+
+// function mapStateToProps(store: IStore) {
+//   return {
+//     store: store
+//   };
+// }
+
+// function mapDispatchToProps(dispatch: Dispatch<IStore>) {
+//   return {
+//     toggleSettingsPanel: bindActionCreators(
+//       actions.toggleSettingsPanel,
+//       dispatch
+//     )
+//   };
+// }
+
+// const ConnectedComponent = connect(
+//   state => {},
+//   dispatch => {
+//     action1: () => dispatch(actions.toggleSettingsPanel());
+//   }
+// )(SettingsApi);
