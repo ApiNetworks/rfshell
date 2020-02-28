@@ -7,7 +7,6 @@ import {
   DefaultPalette
 } from "office-ui-fabric-react";
 import { connect } from "react-redux";
-import { actions } from "../../actions";
 import { Dispatch, bindActionCreators } from "redux";
 import { IStore } from "../../store";
 

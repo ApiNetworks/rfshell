@@ -7,11 +7,5 @@ export interface BaseItem {
 }
 
 export interface IStore {
-  baseItems: {
-    [id: string]: BaseItem;
-  };
-
-  filter: FilterTypes;
-  setttingsPanel: true;
-  type: any;
+   settingsPanel: boolean;
 }
