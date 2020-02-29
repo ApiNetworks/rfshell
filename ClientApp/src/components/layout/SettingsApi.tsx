@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types";
 import { Panel } from "office-ui-fabric-react/lib/Panel";
 import { useConstCallback } from "@uifabric/react-hooks";
 import {
@@ -9,8 +10,9 @@ import {
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { IStore } from "../../store";
+import { toggleSettings, toggle } from "../../actions";
 
-export const SettingsApi: React.FunctionComponent = () => {
+export const SettingsApi: React.FunctionComponent = ({ onClick }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const openPanel = useConstCallback(() => setIsOpen(true));
   const dismissPanel = useConstCallback(() => setIsOpen(false));
@@ -27,6 +29,10 @@ export const SettingsApi: React.FunctionComponent = () => {
 
   return (
     <span>
+      <ul>
+        <li onClick={onClick}></li>
+      </ul>
+      >
       <IconButton
         styles={btnSettingsStyle}
         iconProps={{ iconName: "Message" }}
@@ -70,13 +76,37 @@ export const SettingsApi: React.FunctionComponent = () => {
   );
 };
 
-// function mapStateToProps(store: IStore) {
-//   return {
-//     store: store
-//   };
-// }
+SettingsApi.propTypes = {
+  onClick: PropTypes
+};
 
-// function mapDispatchToProps(dispatch: Dispatch<IStore>) {
+const mapStateToProps2 = (state: IStore) => {
+  return {
+    settingsPanel: !state.settingsPanel
+  };
+};
+
+function mapStateToProps(store: IStore) {
+  return {
+    store: store
+  };
+}
+
+function mapDispatchToProps(dispatch: Dispatch) {
+  return {
+    toggle: bindActionCreators(toggleSettings, dispatch)
+  };
+}
+
+const mapDispatchToProps2 = (dispatch: Dispatch) => {
+  return {
+    onPanelClick: () => {
+      dispatch(toggleSettings);
+    }
+  };
+};
+
+// function mapDispatchToProps2(dispatch: Dispatch<IStore>) {
 //   return {
 //     toggleSettingsPanel: bindActionCreators(
 //       actions.toggleSettingsPanel,
@@ -85,9 +115,7 @@ export const SettingsApi: React.FunctionComponent = () => {
 //   };
 // }
 
-// const ConnectedComponent = connect(
-//   state => {},
-//   dispatch => {
-//     action1: () => dispatch(actions.toggleSettingsPanel());
-//   }
-// )(SettingsApi);
+export default connect<{}, {}>(
+  mapStateToProps,
+  mapDispatchToProps
+)(IconButton) as React.ComponentClass<{}>;

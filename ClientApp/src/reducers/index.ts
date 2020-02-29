@@ -1,16 +1,16 @@
 import { IStore } from "../store";
-import { Reducer, combineReducers } from "redux";
-import { createReducer } from "@reduxjs/toolkit";
-import { toggleSettings, toggle } from "../actions"
+import { combineReducers } from "redux";
+import { createReducer, createAction } from "@reduxjs/toolkit";
+import { toggle } from "../actions";
 
 const initialState: IStore = {
-   settingsPanel : true
-}
+  settingsPanel: true
+};
 
-export const settingsPanelReducer = createReducer(0, {
-   [toggle]: (state, action) => state + action.payload,
-})
+export const settingsPanelReducer = createReducer(initialState, {
+  [toggle]: (state, action) => state + action.payload
+});
 
 export const rootReducer = combineReducers({
-   settingsPanel: settingsPanelReducer
+  settingsPanel: settingsPanelReducer
 });

@@ -6,7 +6,7 @@ export class SearchBar extends React.Component {
   render() {
     return (
       <SearchBox
-        labelText="Search"
+        placeholder="Search"
         styles={{
           root: {
             backgroundColor: DefaultPalette.themeLight,

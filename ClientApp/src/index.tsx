@@ -6,7 +6,7 @@ import { initializeIcons } from "office-ui-fabric-react/lib/Icons";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from "@reduxjs/toolkit";
 import App from "./App";
 import { rootReducer } from "./reducers";
 
@@ -26,17 +26,19 @@ mergeStyles({
 });
 
 const store = configureStore({
-   reducer: rootReducer
-})
+  reducer: rootReducer
+});
+
+export default store;
 
 // Log the initial state
 console.log(store.getState());
 
 // Note that subscribe() returns a function for unregistering the listener
-const unsubscribe = store.subscribe(() => console.log(store.getState()))
+const unsubscribe = store.subscribe(() => console.log(store.getState()));
 
 ReactDOM.render(
-   <Provider store={store}>
+  <Provider store={store}>
     <Fabric>
       <App />
     </Fabric>
