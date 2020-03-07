@@ -3,8 +3,9 @@ import { combineReducers } from "redux";
 import { createReducer, createAction } from "@reduxjs/toolkit";
 import { toggle } from "../actions";
 
-const initialState: IStore = {
-  settingsPanel: true
+export const initialState: IStore = {
+  settingsPanel: true,
+  propFromReduxStore: "Initial Global Value1"
 };
 
 export const settingsPanelReducer = createReducer(initialState, {

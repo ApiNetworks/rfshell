@@ -7,5 +7,6 @@ export interface BaseItem {
 }
 
 export interface IStore {
-   settingsPanel: boolean;
+  settingsPanel: boolean;
+  propFromReduxStore: string;
 }

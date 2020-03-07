@@ -3,7 +3,7 @@ import { SearchBar } from "../navigation/SearchBar";
 import { Label } from "office-ui-fabric-react/lib/Label";
 import { Stack, IStackStyles, FontSizes } from "office-ui-fabric-react";
 import { PanelApi } from "./PanelApi";
-import { SettingsApi } from "./SettingsApi";
+import SettingsApi from "./SettingsApi";
 
 const stackLogoStyles: IStackStyles = {
   root: {
@@ -61,7 +61,7 @@ export class Header extends React.Component<IHeaderProps, any> {
           <SearchBar />
         </Stack.Item>
         <Stack.Item styles={settingsStackStyles}>
-          <SettingsApi />
+          <SettingsApi propFromParent={true} />
         </Stack.Item>
       </Stack>
     );

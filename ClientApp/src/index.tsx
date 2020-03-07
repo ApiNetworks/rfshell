@@ -6,9 +6,11 @@ import { initializeIcons } from "office-ui-fabric-react/lib/Icons";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, createStore, combineReducers } from "@reduxjs/toolkit";
 import App from "./App";
-import { rootReducer } from "./reducers";
+import { rootReducer, initialState } from "./reducers";
+import { IStore } from "./store";
+import { toggle } from "./actions";
 
 const rootElement = document.getElementById("root") as HTMLElement;
 
@@ -25,8 +27,27 @@ mergeStyles({
   }
 });
 
+function basicReducer(state: IStore | undefined, action: any): IStore {
+  console.log("Called basicReducer");
+  console.log(JSON.stringify(action));
+  // For now, don't handle any actions
+  // and just return the state given to us.
+  switch (action.type) {
+    case toggle:
+      return initialState;
+    default:
+      return initialState;
+  }
+
+  return initialState;
+}
+
+// todo: investigate combineReducers
+const rootTempReducer = combineReducers({ basic: basicReducer });
+export type RootState = ReturnType<typeof rootReducer>;
+
 const store = configureStore({
-  reducer: rootReducer
+  reducer: basicReducer
 });
 
 export default store;
