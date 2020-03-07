@@ -34,7 +34,11 @@ function basicReducer(state: IStore | undefined, action: any): IStore {
   // and just return the state given to us.
   switch (action.type) {
     case toggle:
-      return initialState;
+      return Object.assign({}, state, {
+        propFromReduxStore:
+          //state?.propFromReduxStore +
+          new Date().getTime() * 10000 + 621355968000000000
+      });
     default:
       return initialState;
   }
