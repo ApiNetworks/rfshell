@@ -10,7 +10,12 @@ import {
 import { connect } from "react-redux";
 import { Dispatch, bindActionCreators } from "redux";
 import { IStore } from "../../store";
-import { toggleSettings, toggle } from "../../actions";
+import {
+  toggleSettings,
+  toggle,
+  righSidebarToggle,
+  righSidebarToggleSettings
+} from "../../actions";
 
 import store from "../..";
 
@@ -31,10 +36,12 @@ export interface IOwnProps {
 
 export interface IStateProps {
   propFromReduxStore: string;
+  settingsPanel: boolean;
 }
 
 export interface IDispatchProps {
   onToggleEvent: () => void;
+  onRightBarToggle: () => void;
 }
 
 export type IComponentProps = IStateProps & IDispatchProps & IOwnProps;
@@ -73,17 +80,18 @@ class SettingsApiComponent extends React.Component<any, any> {
 
   render() {
     console.log("Props:" + JSON.stringify(this.props));
-    const { propFromReduxStore } = this.props;
+    const { propFromReduxStore, settingsPanel } = this.props;
     return (
       <span>
         <ul>
           <li onClick={this._onClick}>{propFromReduxStore}</li>
+          <li onClick={this._onClick}>{settingsPanel}</li>
         </ul>
         <IconButton
           styles={btnSettingsStyle}
           iconProps={{ iconName: "Message" }}
           title="Toggle right panel on/off"
-          onClick={this.onClickToggleEvent}
+          onClick={this.props.onRightBarToggle}
         />
         <IconButton
           styles={btnSettingsStyle}
@@ -111,8 +119,8 @@ class SettingsApiComponent extends React.Component<any, any> {
         />
         <Panel
           headerText="Custom Settings"
-          isOpen={false}
-          onDismiss={this._onDismiss}
+          isOpen={settingsPanel}
+          onDismiss={this.props.onToggleEvent}
           isBlocking={true}
           closeButtonAriaLabel="Close" // You MUST provide this prop! Otherwise screen readers will just say "button" with no label.
         >
@@ -125,14 +133,10 @@ class SettingsApiComponent extends React.Component<any, any> {
 
 function mapStateToProps(state: IStore, ownProps: IOwnProps): IStateProps {
   return {
-    //propFromReduxStore: "slkda kjaldk" //state.propFromReduxStore
-    propFromReduxStore: state.propFromReduxStore
+    propFromReduxStore: state.propFromReduxStore,
+    settingsPanel: state.settingsPanel
   };
 }
-
-const mapDispatchToProps2 = {
-  onToggleEvent: () => toggleSettings
-};
 
 function mapDispatchToProps(
   dispatch: Dispatch,
@@ -142,6 +146,10 @@ function mapDispatchToProps(
     onToggleEvent: () => {
       console.log("Called:toggleRightPanel");
       dispatch(toggleSettings());
+    },
+    onRightBarToggle: () => {
+      console.log("Called:righSidebarToggleSettings");
+      dispatch(righSidebarToggleSettings());
     }
   };
 }

@@ -6,6 +6,7 @@ import {
   IStackItemStyles,
   IStackProps
 } from "office-ui-fabric-react/lib/Stack";
+import { Dispatch, bindActionCreators } from "redux";
 import {
   DefaultPalette,
   mergeStyles
@@ -26,6 +27,10 @@ import {
   Panel
 } from "office-ui-fabric-react";
 import { CommandBarApi } from "./navigation/CommandBarApi";
+import { IStore } from "../store";
+import { IOwnProps } from "./layout/SettingsApi";
+import { toggleSettings, righSidebarToggleSettings } from "../actions";
+import { connect } from "react-redux";
 
 const stackStyles: IStackStyles = {
   root: {
@@ -92,6 +97,14 @@ const sidebarToggleProps: IIconProps = {
   styles: { root: { padding: 10 } }
 };
 
+export interface IHomeStateProps {
+  rightSidebar: boolean;
+}
+
+export interface IHomeDispatchProps {
+  onRightSidebarToggle: () => void;
+}
+
 export class Home extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -119,7 +132,7 @@ export class Home extends React.Component<any, any> {
   }
 
   render() {
-    const { menuItems, farMenuItems } = this.state;
+    const { rightSidebar } = this.props;
     const divStyle = {
       color: "red"
     };
@@ -166,7 +179,7 @@ export class Home extends React.Component<any, any> {
                 <Content />
               </Stack.Item>
 
-              {this.state.showSidebarSettings && (
+              {rightSidebar && (
                 <Stack.Item
                   align="stretch"
                   grow={1}
@@ -185,3 +198,24 @@ export class Home extends React.Component<any, any> {
     );
   }
 }
+
+function mapStateToProps(state: IStore, ownProps: IOwnProps): IHomeStateProps {
+  return {
+    rightSidebar: state.rightSidebar
+  };
+}
+
+function mapDispatchToProps(
+  dispatch: Dispatch,
+  ownProps: IOwnProps
+): IHomeDispatchProps {
+  return {
+    onRightSidebarToggle: () => {
+      console.log("Called:toggleRightPanel");
+      dispatch(righSidebarToggleSettings());
+    }
+  };
+}
+
+const Home2 = connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home2;

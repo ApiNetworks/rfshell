@@ -8,5 +8,6 @@ export interface BaseItem {
 
 export interface IStore {
   settingsPanel: boolean;
+  rightSidebar: boolean;
   propFromReduxStore: string;
 }

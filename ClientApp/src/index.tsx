@@ -3,14 +3,12 @@ import ReactDOM from "react-dom";
 import { mergeStyles, Fabric } from "office-ui-fabric-react";
 import { initializeIcons } from "office-ui-fabric-react/lib/Icons";
 
-import { composeWithDevTools } from "redux-devtools-extension";
+//import { composeWithDevTools } from "redux-devtools-extension";
 import { Provider } from "react-redux";
 
-import { configureStore, createStore, combineReducers } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import App from "./App";
 import { rootReducer, initialState } from "./reducers";
-import { IStore } from "./store";
-import { toggle } from "./actions";
 
 const rootElement = document.getElementById("root") as HTMLElement;
 
@@ -27,31 +25,8 @@ mergeStyles({
   }
 });
 
-function basicReducer(state: IStore | undefined, action: any): IStore {
-  console.log("Called basicReducer");
-  console.log(JSON.stringify(action));
-  // For now, don't handle any actions
-  // and just return the state given to us.
-  switch (action.type) {
-    case toggle:
-      return Object.assign({}, state, {
-        propFromReduxStore:
-          //state?.propFromReduxStore +
-          new Date().getTime() * 10000 + 621355968000000000
-      });
-    default:
-      return initialState;
-  }
-
-  return initialState;
-}
-
-// todo: investigate combineReducers
-const rootTempReducer = combineReducers({ basic: basicReducer });
-export type RootState = ReturnType<typeof rootReducer>;
-
 const store = configureStore({
-  reducer: basicReducer
+  reducer: rootReducer
 });
 
 export default store;
