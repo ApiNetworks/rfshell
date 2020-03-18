@@ -24,7 +24,8 @@ import {
   IIconProps,
   CommandBarButton,
   Separator,
-  Panel
+  Panel,
+  VerticalDivider
 } from "office-ui-fabric-react";
 import { CommandBarApi } from "./navigation/CommandBarApi";
 import { IStore } from "../store";
@@ -105,7 +106,7 @@ export interface IHomeDispatchProps {
   onRightSidebarToggle: () => void;
 }
 
-export class Home extends React.Component<any, any> {
+export class HomeComponent extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this._toggleSidebarApiStack = this._toggleSidebarApiStack.bind(this);
@@ -185,7 +186,9 @@ export class Home extends React.Component<any, any> {
                   grow={1}
                   styles={sidebarMenuStackItemStyles}
                 >
-                  <SidebarApi />
+                  {/* <SidebarApi /> */}
+                  <VerticalDivider />
+                  <Content />
                 </Stack.Item>
               )}
             </Stack>
@@ -217,5 +220,5 @@ function mapDispatchToProps(
   };
 }
 
-const Home2 = connect(mapStateToProps, mapDispatchToProps)(Home);
-export default Home2;
+const Home = connect(mapStateToProps, mapDispatchToProps)(HomeComponent);
+export default Home;

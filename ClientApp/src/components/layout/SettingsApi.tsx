@@ -50,15 +50,14 @@ export interface IComponentState {
   internalComponentStateField: string;
 }
 
-// class SettingsApiComponent extends React.Component<
-//   IComponentProps,
-//   IComponentState
-// > {
-//   constructor(props: IComponentProps) {
-//     super(props);
-//   }
+class SettingsApiComponent extends React.Component<
+  IComponentProps,
+  IComponentState
+> {
+  constructor(props: IComponentProps) {
+    super(props);
+  }
 
-class SettingsApiComponent extends React.Component<any, any> {
   onClickToggleEvent() {
     console.log("Clicked onToggleEvent");
   }
@@ -154,35 +153,8 @@ function mapDispatchToProps(
   };
 }
 
-// function mapDispatchToProps(
-//   dispatch: Dispatch,
-//   ownProps: IOwnProps
-// ): IDispatchProps {
-//   return {
-//     onToggleEvent: () => {
-//       console.log("Called:toggleRightPanel");
-//       dispatch(toggleSettings());
-//     }
-//   };
-// }
-
 const SettingsApi = connect(
   mapStateToProps,
   mapDispatchToProps
 )(SettingsApiComponent);
 export default SettingsApi;
-
-// export default connect<IStateProps, IDispatchProps, IOwnProps, IStore>(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(SettingsApi);
-
-// export default connect<
-//   ISettingsApiMapState,
-//   ISettingsApiMapDispatch,
-//   ISettingsApiProps,
-//   IStore
-// >(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )(IconButton);
